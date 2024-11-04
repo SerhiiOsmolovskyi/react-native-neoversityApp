@@ -2,9 +2,7 @@ import { Alert, StyleSheet, View, Image, Text, Dimensions,  TouchableOpacity, Ke
 import { colors } from '../styles/global';
 import Input from '../components/input';
 
-import {FC, useState, useEffect } from "react";
-import { NativeStackScreenProps } from "react-native-screens/lib/typescript/native-stack/types";
-import { StackParamList } from "../navigation/StackNavigator";
+import { useState, useEffect } from "react";
 
 
 import Button from '../components/Button';
@@ -13,10 +11,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('screen');
 
 
 
-type HomeScreenProps = NativeStackScreenProps<StackParamList, 'Login'>;
-
-
-const LoginScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
+const LoginScreen = ({navigation, route}: {navigation: any, route: any}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
@@ -37,12 +32,12 @@ const LoginScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
     };
 
         const onLogin = () => {
-            console.log('Welcome');
+    navigation.navigate('Home')
         
     };
     
   const onSignUp = () => {
-    navigation.navigate('RegistrationScreen', { userEmail: email })
+    navigation.navigate('SignUp')
   };
 
     const showButton = (
@@ -69,7 +64,7 @@ const LoginScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                  behavior={Platform.OS == "ios" ? 'height' : 'padding'}>
             <View
               style={styles.formContainer}>
-                <Text style={styles.title}>Sign In</Text>
+                <Text style={styles.title}>Login</Text>
                 <View
                     style={[styles.innerContainer, styles.inputContainer]}>
                     <Input

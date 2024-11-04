@@ -13,7 +13,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('screen');
 
 
 
-const RegistrationScreen = ({  }) => {
+const RegistrationScreen = ({navigation, route}: {navigation: any, route: any}) => {
     const [login, setLogin] = useState<string>(''); 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -37,11 +37,11 @@ const RegistrationScreen = ({  }) => {
     };
 
         const onLogin = () => {
-            console.log('Welcome');
+    navigation.navigate('Home')
         
         };
         const onSignUp = () => {
-            console.log('Sign Up');
+            navigation.navigate('Login')
         
         };
 
@@ -107,7 +107,7 @@ const RegistrationScreen = ({  }) => {
                         <View style={[styles.innerContainer, styles.bottomContainer]}>
                             <Button onPress={onLogin}>
                                 <Text style={[styles.baseText, styles.loginButtonText]} >
-                                    Login
+                                    Sign Up
                                 </Text>
                             </Button>
                             <View style={styles.signUpContainer}>
@@ -116,7 +116,7 @@ const RegistrationScreen = ({  }) => {
                                 </Text>
                                 <TouchableOpacity onPress={onSignUp}>
                                     <Text style={[styles.showButton, styles.baseText, styles.signUpText]}>
-                                        Sign in
+                                        Login
                                     </Text>
                                 </TouchableOpacity>
                             </View>
