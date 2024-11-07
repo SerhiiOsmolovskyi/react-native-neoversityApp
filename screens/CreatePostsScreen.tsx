@@ -4,14 +4,15 @@ import * as ImagePicker from 'expo-image-picker';
 import { colors } from '../styles/global';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { Button as RNButton } from 'react-native';
 
 import Button from '../components/Button';
 import PhotoIcon from '../assets/icons/PhotoIcon';
 import LocationIcon from '../assets/icons/LocationIcon';
 import DeleteButton from '../components/DeleteButton';
 
-const CreatePostScreen = () => {
-  const navigation = useNavigation();
+const CreatePostScreen = ({navigation, route}: {navigation: any, route: any}) => {
+  // const navigation = useNavigation();
   const [image, setImage] = useState<string | null>(null);
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
@@ -42,7 +43,8 @@ const CreatePostScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container} >
-      <TouchableOpacity style={styles.imageContainer} onPress={pickImage}>
+      {/* <TouchableOpacity style={styles.imageContainer} onPress={pickImage}> */}
+      <TouchableOpacity style={styles.imageContainer} onPress={() => navigation.navigate('Camera')}>
         {image ? (
           <Image source={{ uri: image }} style={styles.image} />
         ) : (
@@ -81,9 +83,15 @@ const CreatePostScreen = () => {
         <Text style={image ? styles.publishButtonActiveText : styles.publishButtonDisabledText}>
           Publish
         </Text>
-      </Button>
+        </Button>
+         <RNButton
+        title="Open Map"
+        onPress={() => navigation.navigate('Map')} // Перехід на екран карти
+        color={colors.orange}
+      />
       
       </View>
+     
       <View style={styles.deleteButton}>
          <DeleteButton 
         onPress={handleDelete}

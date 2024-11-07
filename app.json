@@ -9,7 +9,17 @@
     "splash": {
       "image": "./assets/images/splash.png ",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(NeoversityApp) to access your camera",
+          "microphonePermission": "Allow $(NeoversityApp) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
+    ]
     },
      "assetBundlePatterns": [
       "assets/fonts/*"
