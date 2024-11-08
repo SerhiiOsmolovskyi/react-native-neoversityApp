@@ -1,9 +1,13 @@
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Text } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider, useDispatch } from 'react-redux';
+import { authStateChanged } from './utils/auth';
+
 
 
 
@@ -12,6 +16,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import StackNavigator from './navigation/StackNavigator';
+import store from './redux/store/store';
 
 SplashScreen.preventAutoHideAsync(); //Don't hide splash screen untill fonts are downloaded
 
@@ -35,14 +40,32 @@ export default function App() {
   
 
   return (
+    <Provider store={store.store}>
+      <PersistGate
+        loading={<Text>Loading...</Text>}
+        persistor={store.persistor}
+      >
+        <AuthListener />
+
+        </PersistGate>
+      </Provider> 
+  );
+}
+
+const AuthListener = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    authStateChanged(dispatch);
+  }, [dispatch]);
+
+
+ return (
 <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
         {/* <BottomTabNavigator /> */}
         <StackNavigator/>
-
       </NavigationContainer>
-    </GestureHandlerRootView>
+        </GestureHandlerRootView>
   );
-}
-
-
+};

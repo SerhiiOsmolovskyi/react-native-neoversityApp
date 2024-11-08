@@ -18,12 +18,15 @@ import Button from "../components/Button";
 import { AntDesign } from '@expo/vector-icons';
 import AddButton from "../components/AddButton";
 import ProfileButton from "../components/ProfileButton";
+import { logoutDB } from "../utils/auth";
+import { useDispatch } from "react-redux";
 
 
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = ({navigation, route}: {navigation: any, route: any}) => {
+const BottomTabNavigator = ({ navigation, route }: { navigation: any, route: any }) => {
+    const dispatch = useDispatch();
     return (
         
   <Tab.Navigator
@@ -69,7 +72,7 @@ const BottomTabNavigator = ({navigation, route}: {navigation: any, route: any}) 
                 component={Home}
                 options={{
                     title: "Posts",
-                    headerRight: () => <LogOutButton onPress={() => navigation.navigate('Login')} />,
+                    headerRight: () => <LogOutButton onPress={() => logoutDB(dispatch)} />,
                     tabBarIcon: () => <ToolBarButton onPress={() => navigation.navigate('PostScreen')} />,
                     // headerTitleStyle: {
                     //     color: 'purple',

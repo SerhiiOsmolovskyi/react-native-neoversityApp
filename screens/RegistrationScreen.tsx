@@ -4,6 +4,7 @@ import Input from '../components/input';
 import { useEffect, useState } from "react";
 import Button from '../components/Button';
 import { AntDesign } from '@expo/vector-icons';
+import { registerDB } from "../utils/auth";
 
 import CrossIcon from '../assets/icons/CrossIcon';
 import LogOutIcon from '../assets/icons/LogOutIcon';
@@ -37,13 +38,13 @@ const RegistrationScreen = ({navigation, route}: {navigation: any, route: any}) 
     };
 
         const onLogin = () => {
-    navigation.navigate('Home')
+    navigation.navigate('Login')
         
         };
-        const onSignUp = () => {
-            navigation.navigate('Login')
-        
-        };
+     const onSignUp = () => {
+    console.log('Sign up!');
+    registerDB({ email, password })
+  };
 
 
 
@@ -105,7 +106,7 @@ const RegistrationScreen = ({navigation, route}: {navigation: any, route: any}) 
                     />
                 </View>
                         <View style={[styles.innerContainer, styles.bottomContainer]}>
-                            <Button onPress={onLogin}>
+                            <Button onPress={onSignUp}>
                                 <Text style={[styles.baseText, styles.loginButtonText]} >
                                     Sign Up
                                 </Text>
@@ -114,7 +115,7 @@ const RegistrationScreen = ({navigation, route}: {navigation: any, route: any}) 
                                 <Text style={[styles.showButton, styles.baseText]}>
                                     Alrady have an account?
                                 </Text>
-                                <TouchableOpacity onPress={onSignUp}>
+                                <TouchableOpacity onPress={onLogin}>
                                     <Text style={[styles.showButton, styles.baseText, styles.signUpText]}>
                                         Login
                                     </Text>

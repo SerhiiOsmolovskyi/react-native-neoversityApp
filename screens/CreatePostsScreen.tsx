@@ -31,7 +31,7 @@ import { useNavigation } from "@react-navigation/native";
 
 // type HomeScreenProps = NativeStackScreenProps<StackParamList, "CreatePost">;
 
-const CreatePostsScreen = ({navigation, route}: {navigation: any, route: any}) => {
+const CreatePostsScreen = ({navigation, route }: {navigation: any, route: any}) => {
 // const CreatePostsScreen: FC<HomeScreenProps> = ({}) => {
  
   const [isShownKeyboard, setIsShownKeyboard] = useState(false);

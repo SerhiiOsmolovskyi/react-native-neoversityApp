@@ -4,6 +4,11 @@ import Input from '../components/input';
 
 import { useState, useEffect } from "react";
 
+import { loginDB } from "../utils/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store/store";
+
+
 
 import Button from '../components/Button';
 
@@ -15,6 +20,8 @@ const LoginScreen = ({navigation, route}: {navigation: any, route: any}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
+  const dispatch = useDispatch();
+
 
 
 
@@ -31,10 +38,15 @@ const LoginScreen = ({navigation, route}: {navigation: any, route: any}) => {
         setIsPasswordVisible(prev => !prev)
     };
 
-        const onLogin = () => {
-    navigation.navigate('Home')
-        
-    };
+        const onLogin = async () => {
+    console.log('onLogin')
+    try {
+      await loginDB({ email, password }, dispatch)
+      // Логіка для переходу на інший екран або відображення повідомлення про успіх
+    } catch (err) {
+      console.error('Login error:', err); // Логування помилок
+    }
+  };
     
   const onSignUp = () => {
     navigation.navigate('SignUp')
