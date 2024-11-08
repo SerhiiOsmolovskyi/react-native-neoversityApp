@@ -11,6 +11,8 @@ import CameraScreen from "../screens/CameraScreen";
 
 const Stack = createStackNavigator();
 
+
+
 const StackNavigator = () => {
     return (
         <Stack.Navigator initialRouteName="Login">
