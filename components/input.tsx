@@ -7,6 +7,7 @@ type InputProps = {
     placeholder?: string,
     outerStyles?: ViewProps['style'],
     onTextChange: (value: string) => void,
+    onBlur?: ()=>void,
     secureTextEntry?: boolean;
     autofocus: boolean;
     rightButton?: React.ReactNode; // Зберігаємо параметр rightButton для інших випадків використання
@@ -15,6 +16,7 @@ type InputProps = {
 const Input: FC<InputProps> = ({
     value,
     onTextChange,
+    onBlur: onBlurCustom,
     placeholder,
     outerStyles,
     secureTextEntry = false,
@@ -25,8 +27,13 @@ const Input: FC<InputProps> = ({
     const [isPasswordVisible, setIsPasswordVisible] = useState(secureTextEntry);
 
     const onFocus = () => setIsFocused(true);
-    const onBlur = () => setIsFocused(false);
-    const togglePasswordVisibility = () => setIsPasswordVisible((prev) => !prev);
+  const onBlur = () => {
+    setIsFocused(false);
+
+    if (onBlurCustom) {
+      onBlurCustom();
+    };
+  };    const togglePasswordVisibility = () => setIsPasswordVisible((prev) => !prev);
 
     return (
         <View style={[styles.input, isFocused && styles.focused, outerStyles]}>
